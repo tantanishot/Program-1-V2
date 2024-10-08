@@ -6,7 +6,6 @@
 using namespace std;
 
 
-int main();
 
 
     TimeSpan::TimeSpan(double hours, double minutes, double seconds) {
@@ -335,128 +334,6 @@ istream& operator>>(istream& input, TimeSpan& time){
 
 
 
-
-
-
-
-
-
-
-int main() {
-    // Test constructors
-    TimeSpan ts1(1, 30, 45);    // 1 hour, 30 minutes, 45 seconds
-    TimeSpan ts2(90, 30);       // 90 minutes, 30 seconds
-    TimeSpan ts3(3600);         // 3600 seconds (1 hour)
-    TimeSpan ts4;               // Default constructor (0 hours, 0 minutes, 0 seconds)
-
-    cout << "Testing constructors:\n";
-    cout << "ts1: " << ts1;
-    cout << "ts2: " << ts2;
-    cout << "ts3: " << ts3;
-    cout << "ts4 (default): " << ts4;
-    cout << endl;
-
-    // Test + operator
-    TimeSpan ts_add = ts1 + ts2; // Adding ts1 and ts2
-    cout << "Testing + operator (ts1 + ts2):\n";
-    cout << "ts1: " << ts1;
-    cout << "ts2: " << ts2;
-    cout << "Result (ts1 + ts2): " << ts_add << endl;
-
-
-    TimeSpan ts_sub = ts1 - ts2; // Subtracting ts2 from ts1
-    cout << "Testing - operator (ts1 - ts2):\n";
-    cout << "ts1: " << ts1;
-    cout << "ts2: " << ts2;
-    cout << "Result (ts1 - ts2): " << ts_sub << endl;
-
-
-
-
-    cout << "Testing setters (ts1):\n";
-    ts1.set_hours(2);            // Set hours to 2
-    ts1.set_minutes(15);         // Set minutes to 15
-    ts1.set_seconds(50);         // Set seconds to 50
-    cout << "After setting ts1 to 2 hours, 15 minutes, and 50 seconds: " << ts1;
-
-
-
-
-    // Test set_time
-    cout << "Testing set_time (ts2):\n";
-    ts2.set_time(5, 45, 25);     // Set ts2 to 5 hours, 45 minutes, and 25 seconds
-    cout << "After setting ts2 to 5 hours, 45 minutes, and 25 seconds: " << ts2;
-
-
-    //----
-        // Test input operator >>
-    cout << "\nEnter time (hours, minutes, seconds) for ts5: ";
-    TimeSpan ts5;
-    cin >> ts5;
-    cout << "You entered ts5: " << ts5;
-
-    // Testing += operator
-    cout << "\nTesting += operator (ts1 += ts2):" << endl;
-    ts1 += ts2;
-    cout << "Result (ts1 += ts2): " << ts1;
-
-    // Testing -= operator
-    cout << "\nTesting -= operator (ts1 -= ts2):" << endl;
-    ts1 -= ts2;
-    cout << "Result (ts1 -= ts2): " << ts1;
-
-    // Testing Comparison Operators
-    cout << "\nTesting comparison operators:" << endl;
-    cout << "ts1: " << ts1;
-    cout << "ts2: " << ts2;
-
-    if (ts1 == ts2) {
-        cout << "ts1 is equal to ts2" << endl;
-    } else {
-        cout << "ts1 is not equal to ts2" << endl;
-    }
-
-    if (ts1 != ts2) {
-        cout << "ts1 is not equal to ts2" << endl;
-    }
-
-    if (ts1 < ts2) {
-        cout << "ts1 is less than ts2" << endl;
-    }
-
-    if (ts1 <= ts2) {
-        cout << "ts1 is less than or equal to ts2" << endl;
-    }
-
-    if (ts1 > ts2) {
-        cout << "ts1 is greater than ts2" << endl;
-    }
-
-    if (ts1 >= ts2) {
-        cout << "ts1 is greater than or equal to ts2" << endl;
-    }
-
-    // Testing Setters and Getters
-    cout << "\nTesting Setters and Getters:" << endl;
-    ts1.set_time(3, 15, 30);
-    cout << "After setting ts1 to 3 hours, 15 minutes, 30 seconds: " << ts1;
-
-    ts1.set_hours(5);
-    cout << "After setting ts1 hours to 5: " << ts1;
-
-    ts1.set_minutes(20);
-    cout << "After setting ts1 minutes to 20: " << ts1;
-
-    ts1.set_seconds(50);
-    cout << "After setting ts1 seconds to 50: " << ts1;
-
-    
-
-
-    
-    return 0;
-
-}
 
 
 
