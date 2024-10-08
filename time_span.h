@@ -42,6 +42,7 @@ class TimeSpan {
     TimeSpan operator-=(const TimeSpan& other_time);
 
      //opoverload unary neg
+    TimeSpan operator-() const;
 
 
     //opoverload comparisons

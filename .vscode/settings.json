@@ -2,6 +2,16 @@
     "files.associations": {
         "xutility": "cpp",
         "iosfwd": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "bit": "cpp",
+        "charconv": "cpp",
+        "exception": "cpp",
+        "format": "cpp",
+        "iterator": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "xmemory": "cpp",
+        "xstring": "cpp",
+        "xtr1common": "cpp"
     }
 }
