@@ -12,9 +12,9 @@ class TimeSpan {
 
 
     public: 
-    TimeSpan(int hours, int minutes, int seconds);
-    TimeSpan(int minutes, int seconds);
-    TimeSpan(int seconds);
+    TimeSpan(double hours, double minutes, double seconds);
+    TimeSpan(double minutes, double seconds);
+    TimeSpan(double seconds);
     TimeSpan();
 
 
@@ -29,8 +29,10 @@ class TimeSpan {
 
     
     //setters
-    void set_time(int hours, int minutes, int seconds);
-
+    void set_time(double new_hours, double new_minutes, double new_seconds);
+    void set_hours(double new_hours);
+    void set_minutes(double new_minutes);
+    void set_seconds(double new_seconds);
 
 
     //op overloads Add, Subtract
@@ -51,8 +53,9 @@ class TimeSpan {
     bool operator>(const TimeSpan& other_time) const;
 
     //opoverload cout cin
-    friend ostream& operator<<(ostream& output, const TimeSpan& time);
-    friend ostream& operator>>(istream& input, const TimeSpan& time);
+
+    friend ostream& operator>>(ostream& input, const TimeSpan& time);
+    friend istream& operator<<(istream& input, TimeSpan& time);
    
     
 

@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "xutility": "cpp",
+        "iosfwd": "cpp",
+        "ostream": "cpp"
+    }
+}
