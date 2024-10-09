@@ -105,7 +105,7 @@ using namespace std;
 
 
     }
-    void TimeSpan::set_minutes(double new_minutes) {\
+    void TimeSpan::set_minutes(double new_minutes) {
         this->minutes_ = 0;
         new_minutes = round(new_minutes);
 
