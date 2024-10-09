@@ -12,6 +12,7 @@
         "utility": "cpp",
         "xmemory": "cpp",
         "xstring": "cpp",
-        "xtr1common": "cpp"
+        "xtr1common": "cpp",
+        "iostream": "cpp"
     }
 }

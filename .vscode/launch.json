@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Program",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/program", // Path to the generated executable
+            "args": [], // Optional: add any command-line arguments for the program
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb", // Use "lldb" for macOS
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build All C++ Files", // The label from tasks.json
+            "miDebuggerPath": "/usr/bin/gdb", // Update to the correct gdb path for your system
+            "logging": {
+                "trace": true,
+                "engineLogging": true,
+                "traceResponse": true
+            }
+        }
+    ]
+}

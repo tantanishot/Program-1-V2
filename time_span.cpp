@@ -9,10 +9,11 @@ using namespace std;
 
 
     TimeSpan::TimeSpan(double hours, double minutes, double seconds) {
-        int total_seconds = 0;
-        total_seconds += hours * 3600;
-        total_seconds += minutes * 60;
-        total_seconds += seconds;
+        hours = round(hours);
+        minutes = round(minutes);
+        seconds = round(seconds);
+
+        int total_seconds = static_cast<int>(hours * 3600 + minutes * 60 + seconds);
 
         //set times
         this->hours_ = total_seconds / 3600;
@@ -25,9 +26,10 @@ using namespace std;
     }
 
     TimeSpan::TimeSpan(double minutes, double seconds) {
-        int total_seconds = 0;
-        total_seconds += minutes * 60;
-        total_seconds += seconds;
+        minutes = round(minutes);
+        seconds = round(seconds);
+
+        int total_seconds = static_cast<int>(minutes * 60 + seconds);
 
         this->hours_ = total_seconds / 3600;
         total_seconds = total_seconds % 3600;
@@ -41,7 +43,8 @@ using namespace std;
 
 
     TimeSpan::TimeSpan(double seconds) {
-        int total_seconds = seconds;
+        int total_seconds = round(seconds);
+
         //set times
         this->hours_ = total_seconds / 3600;
         total_seconds = total_seconds % 3600;
@@ -71,11 +74,12 @@ using namespace std;
 
     //setters
     void TimeSpan::set_time(double new_hours, double new_minutes, double new_seconds){
-        int total_seconds = 0;
-        total_seconds += new_hours * 3600;
-        total_seconds += new_minutes * 60;
-        total_seconds += new_seconds;
-
+        new_hours = round(new_hours);
+        new_minutes = round(new_minutes);
+        new_seconds = round(new_seconds);
+        
+        
+        int total_seconds = static_cast<int>(new_hours * 3600 + new_minutes * 60 + new_seconds);
         //set times
         this->hours_ = total_seconds / 3600;
         total_seconds = total_seconds % 3600;
@@ -88,13 +92,8 @@ using namespace std;
 
     void TimeSpan::set_hours(double new_hours) { 
         this->hours_ = 0;
-        int total_seconds = 0;
-        total_seconds += hours() * 3600;
-        total_seconds += minutes() * 60;
-        total_seconds += seconds();
-
-        total_seconds += new_hours * 3600;
-
+        new_hours = round(new_hours);
+        int total_seconds = static_cast<int>(new_hours * 3600 + minutes() * 60 + seconds());
 
         this->hours_ = total_seconds / 3600;
         total_seconds = total_seconds % 3600;
@@ -108,11 +107,9 @@ using namespace std;
     }
     void TimeSpan::set_minutes(double new_minutes) {\
         this->minutes_ = 0;
-        int total_seconds = 0;
-        total_seconds += hours() * 3600;
-        total_seconds += minutes() * 60;
-        total_seconds += seconds();
+        new_minutes = round(new_minutes);
 
+        int total_seconds = static_cast<int>(hours() * 3600 + new_minutes * 60 + seconds());
         total_seconds += new_minutes * 60;
 
 
@@ -128,14 +125,8 @@ using namespace std;
     }
     void TimeSpan::set_seconds(double new_seconds) {
         this->seconds_ = 0;
-        int total_seconds = 0;
-        total_seconds += hours() * 3600;
-        total_seconds += minutes() * 60;
-        total_seconds += seconds();
-
-        total_seconds += new_seconds;
-
-
+        int total_seconds = round(new_seconds);
+    
         this->hours_ = total_seconds / 3600;
         total_seconds = total_seconds % 3600;
 
@@ -148,8 +139,8 @@ using namespace std;
 
 
     TimeSpan TimeSpan::operator+(TimeSpan const& other_time) {
-    int this_total_seconds = (hours_ * 3600) + (minutes_ * 60) + seconds_;
-    int other_total_seconds = (other_time.hours_ * 3600) + (other_time.minutes_ * 60) + other_time.seconds_;
+        int this_total_seconds = (hours_ * 3600) + (minutes_ * 60) + seconds_;
+        int other_total_seconds = (other_time.hours_ * 3600) + (other_time.minutes_ * 60) + other_time.seconds_;
 
         int total_seconds = this_total_seconds + other_total_seconds;
 
@@ -331,6 +322,10 @@ istream& operator>>(istream& input, TimeSpan& time){
     return input;
 
 }
+
+
+
+
 
 
 
