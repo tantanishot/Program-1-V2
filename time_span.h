@@ -55,11 +55,12 @@ class TimeSpan {
 
     //opoverload cout cin
 
-    friend ostream& operator>>(ostream& input, const TimeSpan& time);
-    friend istream& operator<<(istream& input, TimeSpan& time);
+    friend ostream& operator<<(ostream& outputput, const TimeSpan& time);
+    friend istream& operator>>(istream& input, TimeSpan& time);
    
-    
 
+    //actions
+    void reduce(int final_total_seconds);
 
 
 

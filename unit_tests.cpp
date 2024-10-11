@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "time_span.h"
 using namespace std;
 
@@ -99,6 +100,82 @@ bool TestSetIndividualComponents() {
     return CheckValues(ts, 2, 30, 40);
 }
 
+// Edge case: Handling very large values
+bool TestLargeValues() {
+    TimeSpan ts(1000000); // 1,000,000 seconds
+    return CheckValues(ts, 277, 46, 40); // 277 hours, 46 minutes, 40 seconds
+}
+
+// Edge case: Handling very small fractional seconds (near zero)
+bool TestSmallFractionalSeconds() {
+    TimeSpan ts(0.001);
+    return CheckValues(ts, 0, 0, 0); // Should round down to 0 seconds
+}
+
+// Edge case: Handling negative fractional seconds
+bool TestNegativeFractionalSeconds() {
+    TimeSpan ts(-127.86);
+    return CheckValues(ts, -0, -2, -8); // -2 minutes, -8 seconds
+}
+
+// Edge case: Crossing minute boundaries
+bool TestCrossMinuteBoundary() {
+    TimeSpan ts(59.5); // 59.5 seconds should round up to 1 min
+    return CheckValues(ts, 0, 1, 0); // Should round up to 1 minute
+}
+
+// Edge case: TimeSpan with a very large negative value
+bool TestLargeNegativeValues() {
+    TimeSpan ts(-1000000); // -1,000,000 seconds
+    return CheckValues(ts, -277, -46, -40); // -277 hours, -46 minutes, -40 seconds
+}
+
+// Edge case: Input stream operator (>>) with valid input
+bool TestInputStreamValid() {
+    TimeSpan ts;
+    stringstream ss("2 45 30"); // 2 hours, 45 minutes, 30 seconds
+    ss >> ts;
+    return CheckValues(ts, 2, 45, 30); // Should be 2 hours, 45 minutes, 30 seconds
+}
+
+
+// Edge case: TimeSpan with zero seconds
+bool TestZeroSeconds() {
+    TimeSpan ts(0);
+    return CheckValues(ts, 0, 0, 0);
+}
+
+// Edge case: TimeSpan with a combination of negative and positive values
+bool TestMixedPositiveNegative() {
+    TimeSpan ts(1, -30, 45); // 1 hour, -30 minutes, 45 seconds
+    return CheckValues(ts, 0, 30, 45); // Should correctly adjust to 0 hours, 29 minutes, 45 seconds
+}
+
+
+//Test Case: Checks if the output is the expected format
+bool TestOutputCheck() {
+    TimeSpan ts(59, 59, 59);
+    string compare = ("Hours: 59, Minutes: 59, Seconds: 59 ");
+    ostringstream output_test;
+    output_test << ts;
+    return (compare == output_test.str());
+}
+
+//Edge Case: Checks for smaller granulated floats passed in 
+bool TestFloats1() {
+    TimeSpan ts(2.6, 3, -10);
+    cout << ts << endl;
+    return CheckValues(ts, 2, 38, 50);
+}
+
+
+bool TestFloats2() {
+    TimeSpan ts(1.61, -1.76);
+    cout << ts << endl;
+    return CheckValues(ts, 0, 1, 35);
+
+
+}
 int main() {
     cout << "Testing TimeSpan Class" << endl;
     if (!TestZeros()) cout << "Failed: TestZeros" << endl;
@@ -113,5 +190,16 @@ int main() {
     if (!TestComparisonOperators()) cout << "Failed: TestComparisonOperators" << endl;
     if (!TestSetTime()) cout << "Failed: TestSetTime" << endl;
     if (!TestSetIndividualComponents()) cout << "Failed: TestSetIndividualComponents" << endl;
+    if (!TestLargeValues()) cout << "Failed: TestLargeValues" << endl;
+    if (!TestSmallFractionalSeconds()) cout << "Failed: TestSmallFractionalSeconds" << endl;
+    if (!TestNegativeFractionalSeconds()) cout << "Failed: TestNegativeFractionalSeconds" << endl;
+    if (!TestCrossMinuteBoundary()) cout << "Failed: TestCrossMinuteBoundary" << endl;
+    if (!TestLargeNegativeValues()) cout << "Failed: TestLargeNegativeValues" << endl;
+    if (!TestInputStreamValid()) cout << "Failed: TestInputStreamValid" << endl;
+    if (!TestZeroSeconds()) cout << "Failed: TestZeroSeconds" << endl;
+    if (!TestMixedPositiveNegative()) cout << "Failed: TestMixedPositiveNegative" << endl;
+    if (!TestOutputCheck()) cout << "Failed: TestOutputCheck" << endl;
+    if (!TestFloats1()) cout << "Failed: TestFloats1" << endl;
+    if (!TestFloats2()) cout << "Failed: TestFloats2" << endl;
     cout << "Testing Complete" << endl;
 }
